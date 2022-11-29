@@ -1,8 +1,11 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lv.acodemy.constants.Generic;
 import lv.acodemy.page_object.InventoryPage;
 import lv.acodemy.page_object.LoginPage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +23,11 @@ public class TestSauceDemo {
 
     @BeforeMethod(description = "Preconditions")
     public void initialize() {
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        driver = new ChromeDriver(options);
         driver.get(SAUCE_URL);
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
@@ -54,8 +61,4 @@ public class TestSauceDemo {
         driver.close();
         driver.quit();
     }
-
-
-
-
 }

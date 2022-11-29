@@ -19,7 +19,7 @@ public class TestChrome {
         driver.quit();
     }
 
-    @Test
+    @Test(enabled = false)
     public void chromeTest() {
         driver.get(GOOGLE_URL);
 
@@ -31,7 +31,6 @@ public class TestChrome {
 
         searchField.sendKeys(Keys.ENTER);
 
-        Assert.assertEquals(driver.getTitle(),"acodemy - Google Search");
-
+        Assert.assertEquals(driver.getTitle(), "acodemy - Google Search");
     }
 }
